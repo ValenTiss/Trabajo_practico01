@@ -15,7 +15,7 @@ def probar_apertura_archivo():
     imagen_vacia = np.zeros((numFilas, numColumnas))
     #print("Test 1 running");
     #lectura de la imagen en escala de grises
-    imagen = Image.open('manNoisy.PNG')
+    imagen = Image.open('mujerRuido.PNG')
     #imagen.show()
     
     #crea la imagen a escala de grises
@@ -86,140 +86,6 @@ h=[1,2,3,4,5,6,0]
 #d=np.array([a,b,c,e,f,g,h])
 #print(len(d[6,]))
 
-def calcular_matriz_de_medias(matriz, contador_fila, ventana):
-  #matriz_de_medias= np.ones((len(matriz),len(matriz[0,]) ))*0
-  if contador_fila!=len(matriz):
-    calcular_media_ventana(matriz, contador_fila, 0,ventana)
-    return calcular_matriz_de_medias(matriz, contador_fila+1, ventana)
-  else:
-    return matriz_de_medias
-
-
-def calcular_media_ventana(matriz, fila, contador_columna,ventana):
-  """
-  Calcula la mediana de cada posición de una fila de la matriz dada una ventana de cierto tamaño 
-  """
-  #Cantidad de posiciones a la izquierda/derecha arriba/abajo de la posición específica que pertenecen a la ventana
-  radio= int(ventana/2)
-  #Si no se ha llegado al final de la columna 
-  if len(matriz[fila,])!=contador_columna :
-    #Si se está dentro de la ventana y la ventana no se salga de la matriz por arriba ni por abajo
-    if contador_columna >= radio and len(matriz)-1-radio >= contador_columna:
-      #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
-      if fila >= radio and len(matriz[0,])-1-radio >= fila:
-        media_por_sacar=matriz[fila-radio:fila+radio+1, contador_columna-radio:contador_columna+radio+1]
-        matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())     
-        return calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
-      #La ventana se sale de la matriz por la izquierda
-      elif fila < radio and len(matriz[0,])-1-radio >= fila:
-        media_por_sacar=matriz[0:fila+radio+1, contador_columna-radio:contador_columna+radio+1]
-        matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())     
-        return calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
-      #La ventana se sale de la matriz por la derecha
-      elif fila >= radio and len(matriz[0,])-1-radio < fila:
-        media_por_sacar=matriz[fila-radio: , contador_columna-radio:contador_columna+radio+1]
-        matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-        return calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
-      #La ventana se sale de la matriz lateralmente por ambos lados
-      else:
-        media_por_sacar=matriz[0: , contador_columna-radio:contador_columna+radio+1]
-        matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())     
-        return calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
-    #La ventana se sale de la matriz por arriba 
-    elif contador_columna < radio and len(matriz)-1-radio >= contador_columna:
-      calcular_media_arriba(matriz, fila, contador_columna, radio)
-      return calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
-    #La ventana se sale por abajo
-    elif contador_columna >= radio and len(matriz)-1-radio < contador_columna:
-      calcular_media_abajo(matriz, fila, contador_columna, radio)
-      return calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
-    #La ventana se sale por arriba y por abajo
-    else:
-      calcular_media_abajo_arriba(matriz, fila, contador_columna, radio)
-      return calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
-
-
-def calcular_media_arriba(matriz, fila, contador_columna, radio):
-  """
-  Se calcula la media de una ventana que se sale por arriba
-  """
-  #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
-  if fila >= radio and len(matriz[0,])-1-radio >= fila:
-    media_por_sacar=matriz[fila-radio:fila+radio+1, 0:contador_columna+radio+1]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-  #La ventana se sale de la matriz por la izquierda
-  elif fila < radio and len(matriz[0,])-1-radio >= fila:
-    media_por_sacar=matriz[0:fila+radio+1, 0:contador_columna+radio+1]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())  
-  #La ventana se sale de la matriz por la derecha
-  elif fila >= radio and len(matriz[0,])-1-radio < fila:
-    media_por_sacar=matriz[fila-radio: , 0:contador_columna+radio+1]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())     
-  #La ventana se sale de la matriz lateralmente por ambos lados
-  else:
-    media_por_sacar=matriz[0: , 0:contador_columna+radio+1]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())     
-
-
-
-def calcular_media_abajo(matriz, fila, contador_columna, radio):
-  """
-  Se calcula la media de una ventana que se sale por abajo
-  """
-  #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
-  if fila >= radio and len(matriz[0,])-1-radio >= fila:
-    media_por_sacar=matriz[fila-radio:fila+radio+1, contador_columna-radio:]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-  #La ventana se sale de la matriz por la izquierda
-  elif fila < radio and len(matriz[0,])-1-radio >= fila:
-    media_por_sacar=matriz[0:fila+radio+1, contador_columna-radio:]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-  #La ventana se sale de la matriz por la derecha
-  elif fila >= radio and len(matriz[0,])-1-radio < fila:
-    media_por_sacar=matriz[fila-radio: , contador_columna-radio:]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-  #La ventana se sale de la matriz lateralmente por ambos lados
-  else:
-    media_por_sacar=matriz[0: , contador_columna-radio:]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-
-
-def calcular_media_abajo_arriba(matriz, fila, contador_columna, radio):
-  """
-  Se calcula la media de una ventana que se sale por arriba y abajo
-  """
-  #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
-  if fila >= radio and len(matriz[0,])-1-radio >= fila:
-    media_por_sacar=matriz[fila-radio:fila+radio+1, 0:]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-  #La ventana se sale de la matriz por la izquierda
-  elif fila < radio and len(matriz[0,])-1-radio >= fila:
-    media_por_sacar=matriz[0:fila+radio+1, 0:]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-  #La ventana se sale de la matriz por la derecha
-  elif fila >= radio and len(matriz[0,])-1-radio < fila:
-    media_por_sacar=matriz[fila-radio: , 0:]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-  #La ventana se sale de la matriz lateralmente por ambos lados
-  else:
-    media_por_sacar=matriz[0: , 0:]
-    matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
-
-
-
-
-inicio= time.time()
-matriz= probar_apertura_archivo()
-#print(d,"\n")
-#calcular_media_ventana(d, 0, 0,3)
-#print(matriz_de_medias)
-#matriz=np.random.randint(500, size=(520, 500))
-matriz_de_medias= np.zeros((len(matriz), len( matriz[0,] ))) 
-resultado= calcular_matriz_de_medias(matriz,0,9)
-#print(resultado)
-fin= time.time()
-print(fin-inicio)
-final = abrir_nuevo_archivo(resultado)
 
 
 
@@ -227,7 +93,8 @@ final = abrir_nuevo_archivo(resultado)
 #-----------------------------------------------------------------------------------------------------------
 def calcular_matriz_de_medias(matriz, contador_fila, ventana):
   if contador_fila!=len(matriz):
-    return [calcular_media_ventana(matriz, contador_fila, 0,ventana)].append(calcular_matriz_de_medias(matriz, contador_fila+1, ventana))
+    resultado= calcular_media_ventana(matriz, contador_fila, 0,ventana)
+    return [resultado]+calcular_matriz_de_medias(matriz, contador_fila+1, ventana)
   else:
     return []
 
@@ -247,19 +114,19 @@ def calcular_media_ventana(matriz, fila, contador_columna,ventana):
       #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
       if fila >= radio and len(matriz[0,])-1-radio >= fila:
         media_por_sacar=matriz[fila-radio:fila+radio+1, contador_columna-radio:contador_columna+radio+1]    
-        return media(media_por_sacar.flatten()) + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)        
+        return [media(media_por_sacar.flatten())] + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)        
       #La ventana se sale de la matriz por la izquierda
       elif fila < radio and len(matriz[0,])-1-radio >= fila:
         media_por_sacar=matriz[0:fila+radio+1, contador_columna-radio:contador_columna+radio+1]        
-        return media(media_por_sacar.flatten()) + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
+        return [media(media_por_sacar.flatten())] + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
       #La ventana se sale de la matriz por la derecha
       elif fila >= radio and len(matriz[0,])-1-radio < fila:
         media_por_sacar=matriz[fila-radio: , contador_columna-radio:contador_columna+radio+1]            
-        return media(media_por_sacar.flatten()) + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
+        return [media(media_por_sacar.flatten())] + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
       #La ventana se sale de la matriz lateralmente por ambos lados
       else:
         media_por_sacar=matriz[0: , contador_columna-radio:contador_columna+radio+1]             
-        return media(media_por_sacar.flatten()) + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
+        return [media(media_por_sacar.flatten())] + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
     #La ventana se sale de la matriz por arriba 
     elif contador_columna < radio and len(matriz)-1-radio >= contador_columna:     
       return calcular_media_arriba(matriz, fila, contador_columna, radio) + calcular_media_ventana(matriz, fila, contador_columna+1,ventana)
@@ -279,19 +146,19 @@ def calcular_media_arriba(matriz, fila, contador_columna, radio):
   #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
   if fila >= radio and len(matriz[0,])-1-radio >= fila:
     media_por_sacar=matriz[fila-radio:fila+radio+1, 0:contador_columna+radio+1]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]    
   #La ventana se sale de la matriz por la izquierda
   elif fila < radio and len(matriz[0,])-1-radio >= fila:
     media_por_sacar=matriz[0:fila+radio+1, 0:contador_columna+radio+1]
-    return media(media_por_sacar.flatten())  
+    return [media(media_por_sacar.flatten())]  
   #La ventana se sale de la matriz por la derecha
   elif fila >= radio and len(matriz[0,])-1-radio < fila:
     media_por_sacar=matriz[fila-radio: , 0:contador_columna+radio+1]
-    return media(media_por_sacar.flatten())     
+    return [media(media_por_sacar.flatten())]     
   #La ventana se sale de la matriz lateralmente por ambos lados
   else:
     media_por_sacar=matriz[0: , 0:contador_columna+radio+1]
-    return media(media_por_sacar.flatten())     
+    return [media(media_por_sacar.flatten())]     
 
 
 
@@ -302,19 +169,19 @@ def calcular_media_abajo(matriz, fila, contador_columna, radio):
   #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
   if fila >= radio and len(matriz[0,])-1-radio >= fila:
     media_por_sacar=matriz[fila-radio:fila+radio+1, contador_columna-radio:]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]    
   #La ventana se sale de la matriz por la izquierda
   elif fila < radio and len(matriz[0,])-1-radio >= fila:
     media_por_sacar=matriz[0:fila+radio+1, contador_columna-radio:]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]    
   #La ventana se sale de la matriz por la derecha
   elif fila >= radio and len(matriz[0,])-1-radio < fila:
     media_por_sacar=matriz[fila-radio: , contador_columna-radio:]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]    
   #La ventana se sale de la matriz lateralmente por ambos lados
   else:
     media_por_sacar=matriz[0: , contador_columna-radio:]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]    
 
 
 def calcular_media_abajo_arriba(matriz, fila, contador_columna, radio):
@@ -324,28 +191,24 @@ def calcular_media_abajo_arriba(matriz, fila, contador_columna, radio):
   #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
   if fila >= radio and len(matriz[0,])-1-radio >= fila:
     media_por_sacar=matriz[fila-radio:fila+radio+1, 0:]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]    
   #La ventana se sale de la matriz por la izquierda
   elif fila < radio and len(matriz[0,])-1-radio >= fila:
     media_por_sacar=matriz[0:fila+radio+1, 0:]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]    
   #La ventana se sale de la matriz por la derecha
   elif fila >= radio and len(matriz[0,])-1-radio < fila:
     media_por_sacar=matriz[fila-radio: , 0:]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]    
   #La ventana se sale de la matriz lateralmente por ambos lados
   else:
     media_por_sacar=matriz[0: , 0:]
-    return media(media_por_sacar.flatten())    
+    return [media(media_por_sacar.flatten())]
 
-import time
+
 inicio= time.time()
-#matriz_de_medias= np.zeros((480, 480))
-#print(d,"\n")
-#calcular_media_ventana(d, 0, 0,3)
-#print(matriz_de_medias)
-d=np.random.randint(500, size=(480, 480)) 
-resultado= calcular_matriz_de_medias(d,0,3)
-print(resultado)
+matriz = probar_apertura_archivo()
+resultado= calcular_matriz_de_medias(np.array(calcular_matriz_de_medias(matriz,0,3)),0,3)
+mostrar = abrir_nuevo_archivo(np.array(calcular_matriz_de_medias(np.array(resultado),0,3)))
 fin= time.time()
 print(fin-inicio)

@@ -8,14 +8,14 @@ import time
 
 def probar_apertura_archivo():
     #cambia el limite de la pila
-    #sys.setrecursionlimit(10**6)
+    sys.setrecursionlimit(10**6)
     numFilas = 60;
     numColumnas = 60;
     #inicializacion en ceros de la imagen
     imagen_vacia = np.zeros((numFilas, numColumnas))
     #print("Test 1 running");
     #lectura de la imagen en escala de grises
-    imagen = Image.open('C:/Users/Usuario/Desktop/taller/Proyecto 2/saltAndPepper.png')
+    imagen = Image.open('manNoisy.PNG')
     #imagen.show()
     
     #crea la imagen a escala de grises
@@ -32,13 +32,11 @@ def probar_apertura_archivo():
     return gray_image_np
 
 
-
-
-
+def abrir_nuevo_archivo(matriz):
+  image = Image.fromarray(matriz)
+  image.show() 
 
 #---------------------------------------------------------------------------------------------------------
-
-
 def media(lista):
         """
         Función que encuentra el valor medio de una lista
@@ -52,99 +50,28 @@ def media(lista):
         numero_medio = int(len(copia_lista)/2)
         return copia_lista[numero_medio]
 
-
 def quick_sort(lista):
-  """
-  Ordena la lista usando el lgoritmo de ordenamiento quick sort
-  Entradas: lista a ordenar
-  Return: lista ordenada
-  """
+  lista_fin = lista.copy()
   if len(lista)>1:
-    return quick_sort(menores(lista[0], lista[1:],0,[])) + [lista[0]] + quick_sort(mayores(lista[0],lista[1:],0,[]))
+    return quick_sort_aux(list(lista_fin),[])
   else:
     return lista
 
-def mayores(valor,lista, contador,lista_mayores):
-  """
-  Crea una lista con los valores mayores a un valor dado
-  parametro 1: Número con el cual se comparan los números de la lista
-  parametro 2: Lista de la cual se desea comparar cada número con valor
-  parametro 3: Cuenta la cantidad de iteraciones, sirve para determinar el indice del valor a comparar
-  parametro 4: Lista que almacenará los valores de la lista que son mayores que el el número que se recibe en la primer entrada de la función
-  Return: Lista con los valores de la lista mayores a valor
-  """
-  #Si la lista está vacía o tiene un solo elemento
-  if len(lista)>1:
-    #Si no se ha evaluado el último elemento de la lista
-    if contador!=len(lista):
-      #Si el número de la lista es mayor o igual que valor
-      if valor <= lista[contador]:
-        #Agrega el número mayor al final de la lista que contiene los números mayores
-        lista_mayores.append(lista[contador])
-        contador+=1
-        #Llamado recursivo
-        return mayores(valor, lista, contador, lista_mayores)
-      #El número de la lista es menor a valor
-      else:
-        contador+=1
-        return mayores(valor,lista, contador, lista_mayores)
-    #Se recorrió toda la lista 
-    else:
-      return lista_mayores
-  #Si el único valor de la lista es mayor a valor
-  elif lista[0]>=valor:
-    return lista
-  #La lista está vacía
-  else:
-      return[]
+def quick_sort_aux(lista,lista_ord):
+  try:
+    elemento_min = min(lista)
+    lista_ord.append(elemento_min)
+    lista.remove(elemento_min)
+    return quick_sort_aux(lista,lista_ord)
 
-def menores(valor,lista, contador,lista_menores):
-  """
-  Crea una lista con los valores mayores a un valor dado
-  parametro 1: Número con el cual se comparan los números de la lista
-  parametro 2: Lista de la cual se desea comparar cada número con valor
-  parametro 3: Cuenta la cantidad de iteraciones, sirve para determinar el indice del valor a comparar
-  parametro 4: Lista que almacenará los valores de la lista que son mayores que el el número que se recibe en la primer entrada de la función
-  Return: Lista con los valores de la lista mayores a valor
-  """
-  #Si la lista está vacía o tiene un solo elemento
-  if len(lista)>1 :
-    #Si no se ha evaluado el último elemento de la lista
-    if len(lista)>1 and contador!=len(lista):
-      #Si el número de la lista es menor que valor
-      if valor >lista[contador]:
-        #Agrega el número menor al final de la lista que contiene los números menores
-        lista_menores.append(lista[contador])
-        contador+=1
-        #Llamado recursivo
-        return menores(valor,lista, contador, lista_menores)
-      #El número de la lista es menor a valor
-      else:
-        contador+=1
-        return menores(valor,lista, contador, lista_menores)
-    #Se recorrió toda la lista
-    else:
-      return lista_menores
-  #Si el único valor de la lista es mayor a valor
-  elif lista[0]<valor:
-    return lista
-  #La lista está vacía
-  else:
-      return[]
+  except IndexError:
+    matriz_res = np.array(lista_ord)
+    return matriz_res
 
-#lista=[2,2,3,2,5,2,7,2]
-#lista=[9,8,7,6,5,4,3,2]
-#lista=[1,9,2,8,6,5,7,3,2,1]
-#lista=[84,3,2,1,7,6,5]
-#lista=[0,1,2,3]
-#lista=[0,1]
-#lista=[1,0]
-#lista=[]
-#lista=[3]
-lista=[3,2,0,5,9,5]
-#print("qs: ", quick_sort(lista), "   lista: ", lista)
-#media(lista)
-
+  except ValueError:
+    elemento_min = lista[0]
+    lista_ord.append(elemento_min)
+    lista.remove(elemento_min)
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -166,8 +93,6 @@ def calcular_matriz_de_medias(matriz, contador_fila, ventana):
     return calcular_matriz_de_medias(matriz, contador_fila+1, ventana)
   else:
     return matriz_de_medias
-
-
 
 
 def calcular_media_ventana(matriz, fila, contador_columna,ventana):
@@ -291,6 +216,7 @@ matriz= probar_apertura_archivo()
 #matriz=np.random.randint(500, size=(520, 500))
 matriz_de_medias= np.zeros((len(matriz), len( matriz[0,] ))) 
 resultado= calcular_matriz_de_medias(matriz,0,21)
-print(resultado)
+#print(resultado)
 fin= time.time()
 print(fin-inicio)
+final = abrir_nuevo_archivo(resultado)

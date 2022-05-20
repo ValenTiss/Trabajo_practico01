@@ -66,11 +66,11 @@ class Ordenamiento_2():
   Return: lista ordenada
   """
   if len(lista)>1:
-    return quick_sort(menores(lista[0], lista[1:],0,[])) + [lista[0]] + quick_sort(mayores(lista[0],lista[1:],0,[]))
+    return self.quick_sort(menores(lista[0], lista[1:],0,[])) + [lista[0]] + quick_sort(mayores(lista[0],lista[1:],0,[]))
   else:
     return lista
 
-def mayores(valor,lista, contador,lista_mayores):
+def mayores(self, valor,lista, contador,lista_mayores):
   """
   Crea una lista con los valores mayores a un valor dado
   parametro 1: Número con el cual se comparan los números de la lista
@@ -89,11 +89,11 @@ def mayores(valor,lista, contador,lista_mayores):
         lista_mayores.append(lista[contador])
         contador+=1
         #Llamado recursivo
-        return mayores(valor, lista, contador, lista_mayores)
+        return self.mayores(valor, lista, contador, lista_mayores)
       #El número de la lista es menor a valor
       else:
         contador+=1
-        return mayores(valor,lista, contador, lista_mayores)
+        return self.mayores(valor,lista, contador, lista_mayores)
     #Se recorrió toda la lista 
     else:
       return lista_mayores
@@ -104,7 +104,7 @@ def mayores(valor,lista, contador,lista_mayores):
   else:
       return[]
 
-def menores(valor,lista, contador,lista_menores):
+def menores(self, valor,lista, contador,lista_menores):
   """
   Crea una lista con los valores mayores a un valor dado
   parametro 1: Número con el cual se comparan los números de la lista
@@ -123,11 +123,11 @@ def menores(valor,lista, contador,lista_menores):
         lista_menores.append(lista[contador])
         contador+=1
         #Llamado recursivo
-        return menores(valor,lista, contador, lista_menores)
+        return self.menores(valor,lista, contador, lista_menores)
       #El número de la lista es menor a valor
       else:
         contador+=1
-        return menores(valor,lista, contador, lista_menores)
+        return self.menores(valor,lista, contador, lista_menores)
     #Se recorrió toda la lista
     else:
       return lista_menores

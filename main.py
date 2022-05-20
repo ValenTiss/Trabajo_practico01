@@ -30,5 +30,5 @@ else:
 #Momento de finalización de la prueba
 fin= time.time()
 
-print("Tiempo que tardo el programa en ejecutarse: "+str(int((fin-inicio)*1000)))
+print("Tiempo que tardo el programa en ejecutarse: "+str(int((fin-inicio)*1000)) + " milisegundos.")
 

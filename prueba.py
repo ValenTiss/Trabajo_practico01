@@ -70,7 +70,7 @@ def quick_sort_aux(lista,lista_ord):
 
   except IndexError:
     matriz_res = np.array(lista_ord)
-    return matriz_res
+    return lista_ord
 
   except ValueError:
     elemento_min = lista[0]
@@ -194,10 +194,12 @@ def calcular_media_abajo_arriba(matriz, fila, contador_columna, radio):
     matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
 
 
-inicio= time.time()
-matriz= probar_apertura_archivo()
-matriz_de_medias= np.zeros((len(matriz), len( matriz[0,] )))
-resultado= calcular_matriz_de_medias(matriz,0,5)
-abrir = abrir_nuevo_archivo(calcular_matriz_de_medias(calcular_matriz_de_medias(matriz,0,5),0,5))
-fin= time.time()
-print(fin-inicio)
+lista =  [125,255,213,255
+,234,121,131,45,
+125,255,213,255
+,234,121,131,45,
+125,255,213,255
+,234,121,131,45,]
+
+resultado = media(lista)
+print(resultado)

@@ -2,14 +2,13 @@ import numpy as np
 import sys
 
 class Ordenamiento():
-"""
-Clase que contiene una función (con un algoritmo) que se encargan de ordenar las listas y calcular la media
-"""
+  """
+  Clase que contiene una función (con un algoritmo) que se encargan de ordenar las listas y calcular la media
+  """
   
   def _init_(self):
     pass
   def media(self,lista):
-
     """
     Función que encuentra el valor medio de una lista
     Parámetro: lista de la que se encontrará la media
@@ -63,14 +62,13 @@ Clase que contiene una función (con un algoritmo) que se encargan de ordenar la
       lista.remove(elemento_min)
 
 class Ordenamiento_2():
-"""
-Clase que contiene una función (con un algoritmo distinto al que se encuentra en Ordenamiento) que se encargan de ordenar las listas y calcular la media
-"""
+  """
+  Clase que contiene una función (con un algoritmo distinto al que se encuentra en Ordenamiento) que se encargan de ordenar las listas y calcular la media
+  """
 
   def _init_(self):
     pass
   def media(self,lista):
-
     """
     Función que encuentra el valor medio de una lista
     parámetro: lista de la que se encontrará la media

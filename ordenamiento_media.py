@@ -8,9 +8,9 @@ class Ordenamiento():
   def media(self,lista):
     """
     Función que encuentra el valor medio de una lista
-    parámetro: lista de la que se encontrará la media
+    Parámetro: lista de la que se encontrará la media
     Return: número medio
-    Restricción: Para listas de tamaño n (un número par) toma la media como el valor en la posición
+    Restricción: Para listas de tamaño n (un número par) toma la media como el valor en la posición (n/2)+1
     """
     #Se ordena la lista de menor a mayor
     copia_lista= self.quick_sort(list(lista))
@@ -21,6 +21,12 @@ class Ordenamiento():
        
 
   def quick_sort(self, lista):
+    """"
+    Función que utiliza el algoritmo quicksort para ordenar una lista.
+    Parametro: Lista desordenada
+    Return: Lista ordenada
+    Nota: Se crea una copia de la lista para evitar modificar la lista original.
+    """"
     lista_fin = lista.copy()
     if len(lista)>1:
       return self.quick_sort_aux(lista_fin,[])

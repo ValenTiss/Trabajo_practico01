@@ -11,7 +11,8 @@ class Apertura():
     sys.setrecursionlimit(10**6)
     #inicializacion en ceros de la imagen
     #lectura de la imagen en escala de grises
-    imagen = Image.open('mujerRuido.PNG')
+    direccion_archivo= input("Introduzca la dirección de la imagen a la que le desea aplicar el filtro de medianas:")
+    imagen = Image.open(direccion_archivo)
     #crea la imagen a escala de grises
     gray_image = ImageOps.grayscale(imagen)
     gray_image.show()

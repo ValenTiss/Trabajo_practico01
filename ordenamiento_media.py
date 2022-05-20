@@ -8,9 +8,9 @@ class Ordenamiento():
 
     """
     Función que encuentra el valor medio de una lista
-    parámetro: lista de la que se encontrará la media
+    Parámetro: lista de la que se encontrará la media
     Return: número medio
-    Restricción: Para listas de tamaño n (un número par) toma la media como el valor en la posición
+    Restricción: Para listas de tamaño n (un número par) toma la media como el valor en la posición (n/2)+1
     """
     #Se ordena la lista de menor a mayor
     copia_lista= self.quick_sort(lista)
@@ -18,6 +18,7 @@ class Ordenamiento():
     numero_medio = int(len(copia_lista)/2)
     return copia_lista[numero_medio]
 
+<<<<<<< HEAD
 
   def quick_sort(self,lista):
     """
@@ -25,6 +26,15 @@ class Ordenamiento():
     Entradas: lista a ordenar
     Return: lista ordenada
     """
+=======
+  def quick_sort(self, lista):
+    """"
+    Función que utiliza el algoritmo quicksort para ordenar una lista.
+    Parametro: Lista desordenada
+    Return: Lista ordenada
+    Nota: Se crea una copia de la lista para evitar modificar la lista original.
+    """"
+>>>>>>> 9de42b0e9f033ffae5f676fa78d4f3b9eeb130da
     lista_fin = lista.copy()
 
     if len(lista)>1:
@@ -47,6 +57,7 @@ class Ordenamiento():
       elemento_min = lista[0]
       lista_ord.append(elemento_min)
       lista.remove(elemento_min)
+<<<<<<< HEAD
 
   def calcular_matriz_de_medias(self,matriz, contador_fila, ventana):
     #matriz_de_medias= np.ones((len(matriz),len(matriz[0,]) ))*0
@@ -152,3 +163,5 @@ def menores(valor,lista, contador,lista_menores):
   else:
       return[]
 
+=======
+>>>>>>> 9de42b0e9f033ffae5f676fa78d4f3b9eeb130da

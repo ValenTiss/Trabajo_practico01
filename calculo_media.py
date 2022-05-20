@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 import matplotlib.pyplot as plotter
-from ordenamiento_media import Ordenamiento
+from ordenamiento_media import Ordenamiento,Ordenamiento_2
 from Apertura import Apertura
 class Calculo_Media():
   def __init__(self,matriz):

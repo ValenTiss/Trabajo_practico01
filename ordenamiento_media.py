@@ -2,6 +2,10 @@ import numpy as np
 import sys
 
 class Ordenamiento():
+"""
+Clase que contiene una función (con un algoritmo) que se encargan de ordenar las listas y calcular la media
+"""
+  
   def _init_(self):
     pass
   def media(self,lista):
@@ -19,20 +23,36 @@ class Ordenamiento():
     return copia_lista[numero_medio]
 
   def quick_sort(self,lista):
+    """
+    Ordena la lista usando un nuevo algoritmo de ordenamiento 
+    Entradas: lista a ordenar
+    Return: lista ordenada
+    Nota: Para simplificar el código se utilizó el mismo nombre del otro algoritmo de ordenamiento
+    """
+    #Crea una copia de lista
     lista_fin = lista.copy()
-
     if len(lista)>1:
       return self.quick_sort_aux(list(lista_fin),[])
     else:
       return self.lista
 
   def quick_sort_aux(self,lista,lista_ord):
+    """
+    Función que se encarga de encontrar el elemento mínimo de la copia de la lista, agregarlo a una nueva lista y eliminarlo de la copia de la lista original
+    Parametro 1: Lista que se desea ordenar (copia de la lista original)
+    Parametro 2: Lista ordenada ascendentemente
+    """
+    #Si lista no está vacía
     try:
+      #Encuentra el elemento mínimo
       elemento_min = min(lista)
+      #Agrega el elemento mínimo y lo agrega al final de lista_ord
       lista_ord.append(elemento_min)
+      #Elimina el elemento de lista
       lista.remove(elemento_min)
       return self.quick_sort_aux(lista,lista_ord)
 
+    #Si lista está vacía
     except IndexError:
       matriz_res = np.array(lista_ord)
       return matriz_res
@@ -43,6 +63,10 @@ class Ordenamiento():
       lista.remove(elemento_min)
 
 class Ordenamiento_2():
+"""
+Clase que contiene una función (con un algoritmo distinto al que se encuentra en Ordenamiento) que se encargan de ordenar las listas y calcular la media
+"""
+
   def _init_(self):
     pass
   def media(self,lista):
@@ -61,7 +85,7 @@ class Ordenamiento_2():
 
   def quick_sort(self,lista):
     """
-    Ordena la lista usando el lgoritmo de ordenamiento quick sort
+    Ordena la lista usando el algoritmo de ordenamiento quick sort
     Entradas: lista a ordenar
     Return: lista ordenada
     """

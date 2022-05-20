@@ -18,23 +18,7 @@ class Ordenamiento():
     numero_medio = int(len(copia_lista)/2)
     return copia_lista[numero_medio]
 
-<<<<<<< HEAD
 
-  def quick_sort(self,lista):
-    """
-    Ordena la lista usando el lgoritmo de ordenamiento quick sort
-    Entradas: lista a ordenar
-    Return: lista ordenada
-    """
-=======
-  def quick_sort(self, lista):
-    """"
-    Función que utiliza el algoritmo quicksort para ordenar una lista.
-    Parametro: Lista desordenada
-    Return: Lista ordenada
-    Nota: Se crea una copia de la lista para evitar modificar la lista original.
-    """"
->>>>>>> 9de42b0e9f033ffae5f676fa78d4f3b9eeb130da
     lista_fin = lista.copy()
 
     if len(lista)>1:
@@ -57,15 +41,6 @@ class Ordenamiento():
       elemento_min = lista[0]
       lista_ord.append(elemento_min)
       lista.remove(elemento_min)
-<<<<<<< HEAD
-
-  def calcular_matriz_de_medias(self,matriz, contador_fila, ventana):
-    #matriz_de_medias= np.ones((len(matriz),len(matriz[0,]) ))*0
-    if contador_fila!=len(self.matriz):
-      self.calcular_media_ventana(matriz, contador_fila, 0,ventana)
-      return self.calcular_matriz_de_medias(matriz, contador_fila+1, ventana)
-    else:
-      return matriz_de_medias
 
 class Ordenamiento_2():
   def _init_(self):
@@ -163,5 +138,3 @@ def menores(valor,lista, contador,lista_menores):
   else:
       return[]
 
-=======
->>>>>>> 9de42b0e9f033ffae5f676fa78d4f3b9eeb130da

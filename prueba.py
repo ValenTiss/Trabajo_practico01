@@ -193,13 +193,3 @@ def calcular_media_abajo_arriba(matriz, fila, contador_columna, radio):
     media_por_sacar=matriz[0: , 0:]
     matriz_de_medias[fila,contador_columna]=media(media_por_sacar.flatten())    
 
-
-lista =  [125,255,213,255
-,234,121,131,45,
-125,255,213,255
-,234,121,131,45,
-125,255,213,255
-,234,121,131,45,]
-
-resultado = media(lista)
-print(resultado)

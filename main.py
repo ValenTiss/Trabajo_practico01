@@ -21,4 +21,4 @@ else:
 
 
 fin= time.time()
-print("Tiempo que tardo el programa en ejecutarse: "+str(int((fin-inicio)*1000)))
+print("Tiempo que tardo el programa en ejecutarse: "+str(int((fin-inicio))*1000))

@@ -8,8 +8,13 @@ from ordenamiento_media  import Ordenamiento
 
 
 def probar_apertura_archivo():
+    """
+    Función que busca una imagen en la dirección digitada y la transforma en una matriz 
+    Return: matriz de la imagen
+    Restricción: Se debe digitar correctamente la dirección de la imagen previamente guardada que se desea filtrar
+    """
     #cambia el limite de la pila
-    sys.setrecursionlimit(10**6)
+    #sys.setrecursionlimit(10**6)
     #inicializacion en ceros de la imagen
     #lectura de la imagen en escala de grises
     imagen = Image.open('pixelesimagen.jpeg')
@@ -23,8 +28,11 @@ def probar_apertura_archivo():
 
 
 def abrir_nuevo_archivo(matriz):
-  image = Image.fromarray(matriz)
-  image.show() 
+    """
+    Función que transforma en una imagen una matriz recibida
+    """
+    image = Image.fromarray(matriz)
+    image.show() 
 
 
 def calcular_matriz_de_medias(matriz, contador_fila, ventana):
@@ -39,7 +47,7 @@ def calcular_matriz_de_medias(matriz, contador_fila, ventana):
 
 inicio= time.time()
 matriz = probar_apertura_archivo()
-resultado= calcular_matriz_de_medias(np.array(calcular_matriz_de_medias(matriz,0,3)),0,3)
+resultado= np.array(calcular_matriz_de_medias(np.array(calcular_matriz_de_medias(matriz,0,3)),0,3))
 print(resultado)
 mostrar = abrir_nuevo_archivo(np.array(calcular_matriz_de_medias(np.array(resultado), 0,3)))
 fin= time.time()

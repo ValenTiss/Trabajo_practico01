@@ -6,7 +6,7 @@ from Apertura import Apertura
 
 
 class Calculo_Media():
-  
+  #Constructor
   def __init__(self,matriz):
     self.matriz_de_medias= np.zeros((len(matriz), len( matriz[0,] )))
   
@@ -84,9 +84,14 @@ def calcular_media_ventana(self,matriz, fila, contador_columna,ventana,selector)
       return calcular_media_ventana(self,matriz, fila, contador_columna+1,ventana,selector)
 
 
-def calcular_media_arriba(self,matriz, fila, contador_columna, radio,selector):
+def calcular_media_arriba(self,matriz, fila, contador_columna, radio, selector):
   """
-  Se calcula la media de una ventana que se sale por arriba
+  Se calcula la media de una ventana que se sale por arriba de una posición específica de la matriz
+  Parametro 1: matriz a la que se le aplicará el filtro de medianas 
+  Parametro 2: numero de fila de la posición específica
+  Parametro 3: numero de columna de la posición específica
+  Parametro 4: cantidad de posiciones a la izquierda/derecha arriba/abajo de la posición específica que pertenecen a la ventana
+  Parametro 5: Algoritmo de ordenamiento que se desea utilizar. Opciones: 1 o 2
   """
   #Si se desea usar el segundo algoritmo de ordenamiento
   if selector == 2 :
@@ -111,13 +116,19 @@ def calcular_media_arriba(self,matriz, fila, contador_columna, radio,selector):
     media_por_sacar=matriz[0: , 0:contador_columna+radio+1]
     self.matriz_de_medias[fila,contador_columna]=orde.media(media_por_sacar.flatten())     
 
-def calcular_media_abajo(self,matriz, fila, contador_columna, radio,selector):
+def calcular_media_abajo(self,matriz, fila, contador_columna, radio, selector):
   """
-  Se calcula la media de una ventana que se sale por abajo
-  """
-  
+  Se calcula la media de una ventana que se sale por abajo de una posición específica de la matriz
+  Parametro 1: matriz a la que se le aplicará el filtro de medianas 
+  Parametro 2: numero de fila de la posición específica
+  Parametro 3: numero de columna de la posición específica
+  Parametro 4: cantidad de posiciones a la izquierda/derecha arriba/abajo de la posición específica que pertenecen a la ventana
+  Parametro 5: Algoritmo de ordenamiento que se desea utilizar. Opciones: 1 o 2
+  """  
+  #Si se desea usar el segundo algoritmo de ordenamiento
   if selector == 2 :
     orde = Ordenamiento_2()
+  #Si se desea usar el primer algoritmo de ordenamiento
   else:
     orde = Ordenamiento()
   #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
@@ -139,11 +150,17 @@ def calcular_media_abajo(self,matriz, fila, contador_columna, radio,selector):
 
 def calcular_media_abajo_arriba(self,matriz, fila, contador_columna, radio,selector):
   """
-  Se calcula la media de una ventana que se sale por arriba y abajo
+  Se calcula la media de una ventana que se sale por arriba y abajo de una posición específica de la matriz
+  Parametro 1: matriz a la que se le aplicará el filtro de medianas 
+  Parametro 2: numero de fila de la posición específica
+  Parametro 3: numero de columna de la posición específica
+  Parametro 4: cantidad de posiciones a la izquierda/derecha arriba/abajo de la posición específica que pertenecen a la ventana
+  Parametro 5: Algoritmo de ordenamiento que se desea utilizar. Opciones: 1 o 2
   """
-  
+  #Si se desea usar el segundo algoritmo de ordenamiento
   if selector == 2 :
     orde = Ordenamiento_2()
+  #Si se desea usar el primer algoritmo de ordenamiento
   else:
     orde = Ordenamiento()
   #Si la ventana no se sale de la matriz por la derecha ni por la izquierda
@@ -163,5 +180,6 @@ def calcular_media_abajo_arriba(self,matriz, fila, contador_columna, radio,selec
     media_por_sacar=matriz[0: , 0:]
     self.matriz_de_medias[fila,contador_columna]=orde.media(media_por_sacar.flatten())
 
+#Devuelve la matriz de medias
 def get(self):
   return self.matriz_de_medias

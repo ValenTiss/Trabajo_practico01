@@ -1,5 +1,5 @@
 # Trabajo_practico01
-Entrega para el:20 / 05 / 2022
+Entrega para el: 20 / 05 / 2022
 
 Trabajo practico numero:1
 

@@ -9,7 +9,7 @@ Federico Alfaro Chaverri 2022051002
 
 Valentin Tissera Doncini 2022145010
                 
-Profesor:Saul Calderon Ramirez 
+Profesor: Saul Calderon Ramirez 
 
 Instrucciones para usar el codigo :
 

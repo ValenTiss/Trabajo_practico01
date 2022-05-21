@@ -30,7 +30,7 @@ class Apertura():
   def abrir_nuevo_archivo(self,matriz):
     """
     Función que transforma una matriz en una imagen y la muestra.
-    Parámetro: Matriz (matriz de madias calculada)
+    Parámetro: Matriz (matriz de medias calculada)
     """
     #Transforma la matriz en una imagen
     image = Image.fromarray(np.array(matriz))
